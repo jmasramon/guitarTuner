@@ -1,5 +1,6 @@
 package com.example.android.tuner;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -246,11 +247,29 @@ public class GuitarActivity extends AppCompatActivity {
                 "com.noisepages.nettoyeur.guitartuner.GuitarTunerActivity"));
         i.addCategory(Intent.CATEGORY_LAUNCHER);
         try {
-            startActivity(i);
+            startActivityForResult(i, 12345);
         } catch (Exception e) {
             Toast.makeText(toasty, "error opening tuner: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (12345) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    // TODO Extract the data returned from the child Activity.
+                    String recMes = data.getStringExtra("relativePitch");
+                    Toast.makeText(toasty, recMes, duration).show();
+                    if(recMes == "lower" || recMes == "higher"){
+                        sendRotateOrder(recMes);
+                    }
+                }
+                break;
+            }
+        }
     }
 }
 
