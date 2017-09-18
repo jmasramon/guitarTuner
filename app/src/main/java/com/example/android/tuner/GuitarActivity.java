@@ -3,6 +3,7 @@ package com.example.android.tuner;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ public class GuitarActivity extends AppCompatActivity {
     private OutputStream outputStream;
     private InputStream inputStream;
 
-    //    Button startButton, sendButton,clearButton,stopButton;
+//    Button startButton, sendButton,clearButton,stopButton;
 //    TextView textView;
 //    EditText editText;
     boolean deviceConnected=false;
@@ -40,9 +41,14 @@ public class GuitarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_guitar);
 
         getSupportActionBar().setTitle("Guitar");
+
         /** No sé com fer per a que es pugui traduir**/
         start();
-        write("hello".getBytes());
+        try {
+            outputStream.write("hello".getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void start() {
@@ -95,9 +101,7 @@ public class GuitarActivity extends AppCompatActivity {
 
         if (pairedDevices.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Please Pair the Device first", Toast.LENGTH_SHORT).show();
-        }
-
-        else {
+        } else {
             for (BluetoothDevice iterator : pairedDevices) {
                 if (iterator.getAddress().equals(DEVICE_ADDRESS)) {
                     device = iterator;
@@ -111,8 +115,9 @@ public class GuitarActivity extends AppCompatActivity {
 
     public boolean BTconnect() {
         boolean connected=true;
-        try {socket = device.createRfcommSocketToServiceRecord(PORT_UUID);
-             socket.connect();
+        try {
+            socket = device.createRfcommSocketToServiceRecord(PORT_UUID);
+            socket.connect();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -120,13 +125,17 @@ public class GuitarActivity extends AppCompatActivity {
         }
 
         if(connected) {
-            try {outputStream=socket.getOutputStream();
+            try {
+                outputStream=socket.getOutputStream();
             }
-            catch (IOException e) {e.printStackTrace();
+            catch (IOException e) {
+                e.printStackTrace();
             }
-            try {inputStream=socket.getInputStream();
+            try {
+                inputStream=socket.getInputStream();
             }
-            catch (IOException e) {e.printStackTrace();
+            catch (IOException e) {
+                e.printStackTrace();
             }
         }
         return connected;
@@ -143,9 +152,13 @@ public class GuitarActivity extends AppCompatActivity {
                         if(byteCount > 0) {
                             byte[] rawBytes = new byte[byteCount];
                             inputStream.read(rawBytes);
-                            final String string = new String(rawBytes,"UTF-8");
+                            final String recMes = new String(rawBytes,"UTF-8");
                             handler.post(new Runnable() {
-                                public void run() {Toast.makeText(toasty, string, duration).show();
+                                public void run() {
+                                Toast.makeText(toasty, recMes, duration).show();
+                                if(recMes == "lower" || recMes == "higher"){
+                                    sendRotateOrder(recMes);
+                                }
                                 }
                             });
                         }
@@ -162,49 +175,82 @@ public class GuitarActivity extends AppCompatActivity {
     Context toasty = GuitarActivity.this;
     int duration = Toast.LENGTH_SHORT;
 
-    public void pressString1(View view) {
-        CharSequence pressed = "Tuning to E";
+    private void pressString(String noteName, String noteCode){
+        CharSequence pressed = "Tuning to " + noteName;
         Toast.makeText(toasty, pressed, duration).show();
 
-        /**send "string1" to Arduino
-            boolean done = false;
-            while (done == false) {
-                wait for orders
-                receive "listen" from Arduino
-                listen for sound
-                if (sound > tune) send "tune down" to Arduino
-                else if (sound < tune) send "tune up" to Arduino
-                else if (sound == tune) {
-                    send "done" to Arduino;
-                    done = true;
-                }
-            }
-        **/
+        try {
+            outputStream.write(noteCode.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        openTunningActivity();
+
+        /**
+         send "string1" to Arduino
+         boolean done = false;
+         while (done == false) {
+         wait for orders
+         receive "listen" from Arduino
+         listen for sound
+         if (sound > tune) send "tune down" to Arduino
+         else if (sound < tune) send "tune up" to Arduino
+         else if (sound == tune) {
+         send "done" to Arduino;
+         done = true;
+         }
+         }
+         **/
+    }
+
+    public void pressString1(View view) {
+        this.pressString( "E", "1");
     }
 
     public void pressString2(View view) {
-        CharSequence pressed = "Tuning to A";
-        Toast.makeText(toasty, pressed, duration).show();
+        this.pressString( "A", "2");
     }
 
     public void pressString3(View view) {
-        CharSequence pressed = "Tuning to D";
-        Toast.makeText(toasty, pressed, duration).show();
+        this.pressString( "D", "3");
     }
 
     public void pressString4(View view) {
-        CharSequence pressed = "Tuning to G";
-        Toast.makeText(toasty, pressed, duration).show();
+        this.pressString( "G", "4");
     }
 
     public void pressString5(View view) {
-        CharSequence pressed = "Tuning to B";
-        Toast.makeText(toasty, pressed, duration).show();
+        this.pressString( "B", "5");
     }
 
     public void pressString6(View view) {
-        CharSequence pressed = "Tuning to E'";
-        Toast.makeText(toasty, pressed, duration).show();
+        this.pressString( "E", "6");
+    }
+
+    protected void sendRotateOrder(String currentFreqRelativePosition) {
+        String order = (currentFreqRelativePosition == "lower" ? "t_left" : "t_right");
+        CharSequence orderMes = "Rotating " + order;
+        Toast.makeText(toasty, orderMes, duration).show();
+
+        try {
+            outputStream.write(order.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void openTunningActivity() {
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.setComponent(new ComponentName("com.noisepages.nettoyeur",
+                "com.noisepages.nettoyeur.guitartuner.GuitarTunerActivity"));
+        i.addCategory(Intent.CATEGORY_LAUNCHER);
+        try {
+            startActivity(i);
+        } catch (Exception e) {
+            Toast.makeText(toasty, "error opening tuner: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
     }
 }
 
