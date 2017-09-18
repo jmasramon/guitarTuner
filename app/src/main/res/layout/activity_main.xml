@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.android.tuner.MainActivity">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:textColor="#000000"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guitar"
+                android:text="@string/guitar"
+                android:textSize="30sp"
+                android:padding="16dp"
+                android:fontFamily="sans-serif-light"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorAccent"
+                android:text="@string/guitar"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guitalele"
+                android:text="@string/guitalele"
+                android:textSize="30sp"
+                android:padding="16dp"
+                android:fontFamily="sans-serif-light"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorAccent"
+                android:text="@string/guitar"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ukulele"
+                android:text="@string/ukulele"
+                android:textSize="30sp"
+                android:padding="16dp"
+                android:fontFamily="sans-serif-light"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorAccent"
+                android:text="@string/guitar"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bass"
+                android:text="@string/bass"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-light"
+                android:padding="16dp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorAccent"
+                android:text="@string/guitar"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/other"
+                android:text="@string/other"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-light"
+                android:padding="16dp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

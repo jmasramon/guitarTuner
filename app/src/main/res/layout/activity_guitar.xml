@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.example.android.tuner.GuitarActivity">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:id="@+id/complexE1">
+
+                    <Button
+                        android:id="@+id/buttonE1"
+                        android:onClick="pressString1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="E"
+                        android:textSize="20dp"
+                        android:textColor="#000000" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="120dp"
+                        android:src="@drawable/stringe1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@id/complexE1"
+                    android:padding="16dp">
+
+                    <Button
+                        android:id="@+id/buttonA"
+                        android:onClick="pressString2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="A"
+                        android:textSize="20dp"
+                        android:textColor="#000000" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="120dp"
+                        android:src="@drawable/stringa"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:id="@+id/complexD">
+
+                    <Button
+                        android:id="@+id/buttonD"
+                        android:onClick="pressString3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="D"
+                        android:textSize="20dp"
+                        android:textColor="#000000" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="120dp"
+                        android:src="@drawable/stringd"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_toRightOf="@id/complexD">
+
+                    <Button
+                        android:id="@+id/buttonG"
+                        android:onClick="pressString4"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="G"
+                        android:textSize="20dp"
+                        android:textColor="#000000" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="120dp"
+                        android:src="@drawable/stringg"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:id="@+id/complexB">
+
+                    <Button
+                        android:id="@+id/buttonB"
+                        android:onClick="pressString5"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="B"
+                        android:textSize="20dp"
+                        android:textColor="#000000" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="120dp"
+                        android:src="@drawable/stringb"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@id/complexB"
+                    android:padding="16dp">
+
+                    <Button
+                        android:id="@+id/buttonE2"
+                        android:onClick="pressString6"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="E'"
+                        android:textSize="20dp"
+                        android:textColor="#000000" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="120dp"
+                        android:src="@drawable/stringe2"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+
+

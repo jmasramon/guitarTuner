@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guitar">Guitarra</string>
+    <string name="bass">Baix</string>
+    <string name="other">Altre</string>
+    <string name="app_name">Afinador</string>
+    <string name="category_bass">Baix</string>
+    <string name="category_guitar">Guitarra</string>
+    <string name="category_other">Altre</string>
+</resources>
